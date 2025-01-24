@@ -1,6 +1,7 @@
 package com.romario.dslist.dto;
 
 import com.romario.dslist.domain.entites.Game;
+import com.romario.dslist.projections.GameMinProjection;
 
 public class GameMinDTO {
 
@@ -14,6 +15,16 @@ public class GameMinDTO {
 		super();
 	}
 
+	
+	public GameMinDTO(GameMinProjection projection) {
+		id = projection.getId();
+		title = projection.getTitle();
+		year = projection.getYear();
+		imgUrl = projection.getImgUrl();
+		shortDescription = projection.getShortDescription();
+	}
+
+	
 	public GameMinDTO(Game entity) {
 		id = entity.getId();
 		title = entity.getTitle();

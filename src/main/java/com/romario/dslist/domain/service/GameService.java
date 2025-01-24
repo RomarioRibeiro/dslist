@@ -10,6 +10,7 @@ import com.romario.dslist.domain.entites.Game;
 import com.romario.dslist.domain.repository.GameRepository;
 import com.romario.dslist.dto.GameDTO;
 import com.romario.dslist.dto.GameMinDTO;
+import com.romario.dslist.projections.GameMinProjection;
 
 @Service
 public class GameService {
@@ -30,4 +31,12 @@ public class GameService {
 		GameDTO dto = new  GameDTO(result);
 		return dto;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> findByList(Long listId) {
+		List<GameMinProjection> result = gameRepository.searchByList(listId);
+		List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
+		return dto;
+	}
+	
 }
